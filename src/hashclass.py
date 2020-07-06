@@ -69,6 +69,11 @@ class HashTable(object):
             # If no return was done during loop,
             # it means key didn't exist.
             raise KeyError()
+
+    def gethashtable(self):
+        """Get a value by key"""
+        return self.hash()
+
     def is_full(self):
         """Determines if the HashTable is too populated."""
         items = 0
@@ -105,4 +110,7 @@ class HashTable(object):
          
 
     def __getitem__(self, key):
-        return self.get(key)
+        if key == 'None':
+            return self.array
+        else:
+            return self.get(key)
