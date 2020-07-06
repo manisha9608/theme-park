@@ -1,0 +1,14 @@
+python visitor_info_app.py
+
+##Enter the file path to read from
+inputPS2.txt
+
+##print file path to know trending city
+trendCity
+
+##print file path to know Birthday of the visitor
+birthdayVisitor
+##enter birthDateFrom
+13-Jan-1995
+##enter birthDateTo
+13-Apr-1995
