@@ -1,6 +1,6 @@
 class Visitor:
 
-  def _init_(self, firstName, lastName, dov, dob, city, phoneNumber):
+  def __init__(self, firstName, lastName, dov, dob, city, phoneNumber):
     self.__firstName = firstName
     self.__lastName = lastName
     self.__dov = dov

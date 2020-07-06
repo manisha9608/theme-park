@@ -10,7 +10,7 @@ class Storage:
     self.__birthday_table = HashTable(365)
 
   def insert(self, visitorObject):
-    date_of_visit = visitorObject.getDateOfvisit()
+    date_of_visit = visitorObject.getDateOfVisit()
     arr = self.__storage_table.get(date_of_visit)
     if (arr is None):
       # record doesn't exist

@@ -6,7 +6,7 @@ class HashTable:
     self.__array = [LinkedList()] * size
 
   def hash(self, key):
-    return key % self.__size
+    return hash(key) % self.__size
 
   def add(self, key, value):
     # Add key, value in hash table
