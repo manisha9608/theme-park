@@ -59,32 +59,55 @@ def birthdayVisitors(birthdayVisitor,birthDateFrom,birthDateTo):
 
 
 
-print('print file path to readi path={}')
+print('print file path to read:')
 in_file = raw_input()
 ht = HashTable()
-#insertVisitor(in_file)
+print("Enter any of the options Visitor name or Trending City or Birthday of Visitors")
+input_entered = raw_input()
+if input_entered == 'Visitor name':
+    print('Please enter a visitor name: ')
+    visitor_name = raw_input()
+    insertVisitor(in_file)
+    visitor_info = findVisitor(visitor_name)
+    print('No of visitors:: {} found with name:: {} visiting on:: {}'.format(visitor_info[0], visitor_info[1],
+                                                                             visitor_info[2]))
+elif input_entered == 'trendCity':
+    city, name = cityVisitors('trendCity')
+    print('Trending City: {} and number of visitors from the city: {}'.format(city, name))
+elif input_entered == 'birthdayVisitor':
+    print('enter birthDateFrom:birthDateTo')
+    birthDateFrom = raw_input()
+    birthDateTo = raw_input()
+    cnt, visitors = birthdayVisitors('birthdayVisitor', birthDateFrom, birthDateTo)
+    print('number of visitors: {} birthday between: {} and {}'.format(cnt, birthDateFrom, birthDateTo))
+    print('Visitors are {}'.format(visitors))
+else:
+    print('No valid input')
+
+
+
 #print('Name of the person to get all information')
-#visitor_name=raw_input()
-#visitor_info=findVisitor(visitor_name)
+#
+#
 #print(findVisitor(visitor_name))
 #print('No of visitors:: {} found with name:: {} visiting on:: {}'.format(visitor_info[0],visitor_info[1],visitor_info[2]))
 #########return len(vis_info),vis_info[0][0],vis_info[0][1].split(',')[1]),vis_info
-print('print file path to know trending city ')
-input_entered = raw_input()
+
+'''print('print file path to know trending city ')
+
 if input_entered == 'trendCity':
     ##print(cityVisitors('trendCity'))
     city,name=cityVisitors('trendCity')
-    print('Trending City: {} and number of visitors from the city: {}'.format(city,name))
+    print('Trending City: {} and number of visitors from the city: {}'.format(city,name))'''
 
-print('print file path to know Birthday of the visitor ')
-input_entered = raw_input()
-print('enter birthDateFrom')
-birthDateFrom= raw_input()
-print('enter birthDateTo')
+#print('print file path to know Birthday of the visitor ')
+#input_entered = raw_input()
+
+'''print('enter birthDateTo')
 birthDateTo= raw_input()
 if input_entered == 'birthdayVisitor':
     ##print(cityVisitors('trendCity'))
     cnt,visitors=birthdayVisitors('birthdayVisitor',birthDateFrom, birthDateTo)
     print('number of visitors: {} birthday between: {} and {}'.format(cnt,birthDateFrom,birthDateTo))
-    print('Visitors are {}'.format(visitors))
+    print('Visitors are {}'.format(visitors))'''
 
