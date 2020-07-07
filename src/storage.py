@@ -5,7 +5,7 @@ class Storage:
     # self.__city_table = HashTable(11)
     # self.__user_table = HashTable(101)
 
-    self.__storage_table = HashTable(101)
+    self.__storage_table = HashTable(11)
 
     self.__birthday_table = HashTable(365)
 
@@ -32,6 +32,14 @@ class Storage:
 
     # insert in birthday table
     self.__birthday_table.add(visitorObject.getDateOfBirth(), visitorObject)
+
+    # print table content
+    print('Printing table contents')
+    print('Storage table:')
+    self.__storage_table.print()
+
+    print('Prinnting birthday table:\n\n')
+    self.__birthday_table.print()
 
   def find_visitor(self, date_of_visit, first_name):
     return first_name

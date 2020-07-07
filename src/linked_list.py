@@ -3,19 +3,39 @@ from node import Node
 class LinkedList:
   def __init__(self):
     self.head = None
-    self.last = None
     self.length = 0
 
-  def push(self, value):
-    if (self.head is None):
-      self.head = Node(value, None)
-      self.last = self.head
-    else:
-      temp = Node(value, None)
-      self.last.next = temp
-      self.last = temp
+  def insertAtHead(self, key, value):
+    # Time Complexity = O(1)
+    temp = Node(key, value, self.head)
+    self.head = temp
 
     # Increase length by 1
     self.length += 1
+
+  def get(self, key):
+    if (self.head is None):
+      return None
+
+    temp= self.head.clone()
+    while(temp != None and temp.key != key):
+      temp = temp.next
+
+    if (temp is None):
+      return None
+
+    return temp.value
+
+  def print(self):
+    if (self.head is None):
+      print('List is empty')
+      return
+
+    temp= self.head.clone()
+    while(temp != None):
+      print('list element: key: {} value: {} '.format(temp.key, temp.value))
+      temp = temp.next
+
+
 
 

@@ -1,10 +1,11 @@
 class Node:
-  def __init__(self, value = None, next_node = None):
+  def __init__(self, key = None, value = None, next_node = None):
+    self.key = key
     self.value = value
     self.next = next_node
 
   def clone(self):
-    return Node(self.value, self.next)
+    return Node(self.key, self.value, self.next)
 
   def equals1(self, other_node):
     if (isinstance(other_node, Node)
