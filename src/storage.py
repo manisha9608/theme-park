@@ -42,12 +42,31 @@ class Storage:
     self.__birthday_table.print()
 
   def find_visitor(self, date_of_visit, first_name):
-    return first_name
+    arr = self.__storage_table.get(date_of_visit)
+    if (arr is None):
+      return None
+
+    user_table = arr[1]
+
+    visitor = user_table.get(first_name)
+    if (visitor is None):
+      return None
+    return visitor
 
   def get_visitor_count(self, date_of_visit):
-    return date_of_visit
+    arr = self.__storage_table.get(date_of_visit)
+    if (arr is None):
+      return None
+
+    user_table = arr[1]
+    return user_table.size()
 
   def get_tending_city(self, date_of_visit):
+    arr = self.__storage_table.get(date_of_visit)
+    if (arr is None):
+      return None
+
+    city_table = arr[0]
     return date_of_visit
 
   def get_birthday_people(self, dob1, dob2):
