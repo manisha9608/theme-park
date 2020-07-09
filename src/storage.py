@@ -71,7 +71,7 @@ class Storage:
         max = value
         city = key
 
-    return city
+    return (city, max)
 
-  def get_birthday_people(self, dob1, dob2):
+  def get_birthday_visitors(self, dob1, dob2):
     return dob2

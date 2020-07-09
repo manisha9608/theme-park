@@ -5,26 +5,29 @@ def insertVisitor(in_file):
 
     f = open(in_file,"r")
     ##f = open(path,"r")
+    count=0
     for i in f:
         print(i.split(',')[0].split(' ')[0],i)
         ht[i.split(',')[0].split(' ')[0]] = i
+        count=count+1
+    fw = open("outputPS2.txt","a")
+    fw.writelines(["\n---------- insert ---------- \n","Total visitor details entered: ",str(count),"\n-----------------------------\n"])
 
 def findVisitor(find_visitor):
     ##ht = HashTable()
     vis_info = ht.get('{}'.format(find_visitor))
     print('No of visitors {} found with name {} visiting on {}'.format(len(vis_info),vis_info[0][0],vis_info[0][1].split(',')[1]),vis_info)
-    return len(vis_info),vis_info[0][0],vis_info[0][1].split(',')[1]
+    return len(vis_info),vis_info[0][0],vis_info[0][1].split(',')[1],vis_info
 
-def cityinsertvisitors(in_file):
-
-    f = open(in_file,"r")
+def cityinsertvisitors():
+    f = open(".\inputPS2.txt","r")
     ##f = open(path,"r")
     for i in f:
         print(i.split(',')[3],i)
         ht[i.split(',')[3]] = i
 
 def cityVisitors(trendCity):
-    cityinsertvisitors(in_file)
+    cityinsertvisitors()
     ##return ht['None']
     ##len(ht['None'])
     li=ht['None']
@@ -37,15 +40,15 @@ def cityVisitors(trendCity):
             city = li[i][0][0]
     return city,cnt
 
-def birthinsertvisitors(in_file):
-    f = open(in_file,"r")
+def birthinsertvisitors():
+    f = open(".\inputPS2.txt","r")
     ##f = open(path,"r")
     for i in f:
         print(i.split(',')[2],i)
         ht[i.split(',')[2]] = i
 
 def birthdayVisitors(birthdayVisitor,birthDateFrom,birthDateTo):
-    birthinsertvisitors(in_file)
+    birthinsertvisitors()
     li = ht['None']
     ret_li=[]
     for i in range(len(li)):
@@ -57,32 +60,55 @@ def birthdayVisitors(birthdayVisitor,birthDateFrom,birthDateTo):
     return len(ret_li),ret_li
     ##return len(li),li
 
+def readPrompts():
+
+    ##f = open(path,"r")
+    for i in f:
+        print(i.split(':')[0])
+        li=[i.split(',')[0].split(' ')[0]]
 
 
-print('print file path to read:')
-in_file = raw_input()
+
 ht = HashTable()
-print("Enter any of the options Visitor name or Trending City or Birthday of Visitors")
-input_entered = raw_input()
-if input_entered == 'Visitor name':
-    print('Please enter a visitor name: ')
-    visitor_name = raw_input()
-    insertVisitor(in_file)
-    visitor_info = findVisitor(visitor_name)
-    print('No of visitors:: {} found with name:: {} visiting on:: {}'.format(visitor_info[0], visitor_info[1],
-                                                                             visitor_info[2]))
-elif input_entered == 'trendCity':
-    city, name = cityVisitors('trendCity')
-    print('Trending City: {} and number of visitors from the city: {}'.format(city, name))
-elif input_entered == 'birthdayVisitor':
-    print('enter birthDateFrom:birthDateTo')
-    birthDateFrom = raw_input()
-    birthDateTo = raw_input()
-    cnt, visitors = birthdayVisitors('birthdayVisitor', birthDateFrom, birthDateTo)
-    print('number of visitors: {} birthday between: {} and {}'.format(cnt, birthDateFrom, birthDateTo))
-    print('Visitors are {}'.format(visitors))
-else:
-    print('No valid input')
+
+print("Insert Visitors by reading inputPS2.txt file")
+insertVisitor(".\inputPS2.txt")
+
+print("Reading promptsPS2.txt file")
+f = open(".\promptsPS2.txt","r")
+for i in f:
+    input_entered = i.split(':')[0].strip()
+    if input_entered == 'findVisitor':
+        visitor_info = findVisitor(i.split(':')[1].strip())
+        print('No of visitors:: {} found with name:: {} visiting on:: {}'.format(visitor_info[0], visitor_info[1], visitor_info[2]))
+        fw = open("outputPS2.txt","a")
+        fw.writelines(["\n---------- findVisitor: ---------- \n",str(visitor_info[0])," visitors with name ",visitor_info[1]," on ", visitor_info[2],"\n"])
+        for item in visitor_info[3]:
+            fw.write("%s\n" % item)
+        fw.write("\n-----------------------------")
+    elif input_entered == 'trendCity':
+        city, name = cityVisitors('trendCity')
+        print('Trending City: {} and number of visitors from the city: {}'.format(city, name))
+        fw = open("outputPS2.txt","a")
+        fw.writelines(["\n---------- trendCity: ---------- \n",str(name)," visitors from ",city, "visiting today\n","-----------------------------"])
+    elif input_entered == 'birthdayVisitor':
+        birthDateFrom = i.split(':')[1].strip()
+        birthDateTo = i.split(':')[2].strip()
+        print("Printing DOB's")
+        print(birthDateFrom)
+        print(birthDateTo)
+        cnt, visitors = birthdayVisitors('birthdayVisitor', birthDateFrom, birthDateTo)
+        #cnt, visitors = birthdayVisitors('birthdayVisitor', birthDateFrom, datetime.date.today().strftime('%d-%b-%Y'))
+        print('number of visitors: {} birthday between: {} and {}'.format(cnt, birthDateFrom, birthDateTo))
+        print('Visitors are {}'.format(visitors))
+        fw = open("outputPS2.txt","a")
+        fw.writelines(["\n---------- birthdayVisitor: ---------- \n",str(len(visitors)),"visitors have upcoming birthdays between",birthDateFrom," and",birthDateTo+"\n"])
+        for item in visitors:
+            fw.write("%s\n" % item)
+        fw.write("-----------------------------")
+    else:
+        print('No valid input')
+        break;
 
 
 
@@ -101,10 +127,10 @@ if input_entered == 'trendCity':
     print('Trending City: {} and number of visitors from the city: {}'.format(city,name))'''
 
 #print('print file path to know Birthday of the visitor ')
-#input_entered = raw_input()
+#input_entered = input()
 
 '''print('enter birthDateTo')
-birthDateTo= raw_input()
+birthDateTo= input()
 if input_entered == 'birthdayVisitor':
     ##print(cityVisitors('trendCity'))
     cnt,visitors=birthdayVisitors('birthdayVisitor',birthDateFrom, birthDateTo)
