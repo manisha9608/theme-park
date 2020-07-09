@@ -14,6 +14,7 @@ class LinkedList:
     self.length += 1
 
   def get(self, key):
+    # returns first occurrence
     if (self.head is None):
       return None
 
@@ -25,6 +26,32 @@ class LinkedList:
       return None
 
     return temp.value
+
+  def getAll(self, key):
+    # returns all occurrence
+    arr = []
+    if (self.head is None):
+      return None
+
+    temp= self.head.clone()
+    while(temp != None):
+      if (temp.key == key):
+        arr.append(temp.value)
+      temp = temp.next
+
+    return arr
+
+  def getByIndex(self, index):
+    if (index >= self.length):
+      return None
+    count = 0
+    temp = self.head.clone()
+    while(temp != None and count < index):
+      temp = temp.next
+    if (temp is None):
+      return None
+    if (count == index):
+      return (temp.key, temp.value)
 
   def print(self):
     if (self.head is None):

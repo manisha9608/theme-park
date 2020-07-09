@@ -2,8 +2,6 @@ from hashtable import HashTable
 
 class Storage:
   def __init__(self):
-    # self.__city_table = HashTable(11)
-    # self.__user_table = HashTable(101)
 
     self.__storage_table = HashTable(11)
 
@@ -48,10 +46,8 @@ class Storage:
 
     user_table = arr[1]
 
-    visitor = user_table.get(first_name)
-    if (visitor is None):
-      return None
-    return visitor
+    return user_table.getAll(first_name)
+
 
   def get_visitor_count(self, date_of_visit):
     arr = self.__storage_table.get(date_of_visit)
@@ -67,7 +63,15 @@ class Storage:
       return None
 
     city_table = arr[0]
-    return date_of_visit
+
+    max = -1
+    city = ''
+    for (key, value) in city_table:
+      if (value > max):
+        max = value
+        city = key
+
+    return city
 
   def get_birthday_people(self, dob1, dob2):
     return dob2
