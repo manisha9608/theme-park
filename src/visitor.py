@@ -29,15 +29,21 @@ class Visitor:
     return self.__dov
 
   def setDateOfVisit(self, dov):
-    date_of_visit = datetime.strptime(dov.strip(), '%d-%b-%Y')
-    self.__dov = date_of_visit
+    try:
+      date_of_visit = datetime.strptime(dov.strip(), '%d-%b-%Y')
+      self.__dov = date_of_visit
+    except:
+      raise ValueError('Unexpected date of visit')
 
   def getDateOfBirth(self):
     return self.__dob
 
   def setDateOfBirth(self, dob):
-    date_of_birth = datetime.strptime(dob.strip(), '%d-%b-%Y')
-    self.__dob = date_of_birth
+    try:
+      date_of_birth = datetime.strptime(dob.strip(), '%d-%b-%Y')
+      self.__dob = date_of_birth
+    except:
+      raise ValueError('Unexpected date of birth')
 
   def getCity(self):
     return self.__city

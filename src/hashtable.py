@@ -12,7 +12,7 @@ def hash_int(key, size):
   return key % size
 
 def hash_date(key, size):
-  return key % size
+  return int(datetime.timestamp(key)) % size
 
 class HashTable:
   def __init__(self, size):
@@ -42,6 +42,11 @@ class HashTable:
     list.insertAtHead(key,value)
     self.__length+=1
 
+  def update(self, key, value):
+    index = self.hash(key)
+    list = self.__array[index]
+    list.remove(key)
+    self.add(key, value)
 
   def get(self, key):
     # return value corresponding to key
@@ -82,10 +87,9 @@ class HashTable:
       if (self.__l >= list.length):
         self.__i +=1
         self.__l = 0
-        self.__next__()
+        return self.__next__()
       else:
         self.__l += 1
         return list.getByIndex(self.__l-1)
-      return self.__i
     else:
       raise StopIteration

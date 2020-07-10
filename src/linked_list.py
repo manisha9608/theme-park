@@ -31,7 +31,7 @@ class LinkedList:
     # returns all occurrence
     arr = []
     if (self.head is None):
-      return None
+      return []
 
     temp= self.head.clone()
     while(temp != None):
@@ -48,10 +48,27 @@ class LinkedList:
     temp = self.head.clone()
     while(temp != None and count < index):
       temp = temp.next
-    if (temp is None):
-      return None
-    if (count == index):
+      count +=1
+
+    if (count == index and temp is not None):
       return (temp.key, temp.value)
+    else:
+      return None
+
+  def remove(self, key):
+    # removes first occurrence of key
+    if (self.head is not None):
+      # remove from head
+      if (self.head.key == key):
+        self.head = self.head.next
+      else:
+        temp = self.head.clone()
+        while(temp is not None and temp.next is not None and temp.next.key != key):
+          temp = temp.next
+
+        if (temp is not None and temp.next is not None and temp.next.key == key):
+          temp.next = temp.next.next
+          self.length -= 1
 
   def print(self):
     if (self.head is None):

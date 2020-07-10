@@ -1,0 +1,30 @@
+1. multiple names with same first names
+2. Names with no last names
+3. Empty names
+4. name with extra white spaces before and after
+5. name with extra spaces between first and last name
+6. name with middle name as well
+7. enteries with manny visitors on same dov
+8. Enteries with same day and month but different year
+9. enteries with leap year and 29th feb
+10.Format of date dd-mmm-yyyy
+11. Format of date dd-MM-yyyy
+12. empty dov
+13. garbbage date
+14. date not properly formatted
+15. same visitor visited twice in a day
+16. more than 5 enteries
+17. less than 5 enteries
+18. empty fields
+19. same city with lower annd upper case
+
+1. Unnknown first name for dov
+2. Visitor exists but not on that particular dov
+3. no visitor for that dov
+4. trending city with all same count
+5. trending city with 2 citiees have same count
+6. dob1 < dob2
+7. dob1 = dob2
+8. dob1 > dob2
+9. dob2-dob1 conntains 29th feb
+

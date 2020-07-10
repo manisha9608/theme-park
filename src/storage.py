@@ -1,6 +1,6 @@
 from hashtable import HashTable
 from birthday_table import BirthdayTable
-from datetime import datetime
+from datetime import datetime, timedelta
 
 class Storage:
   def __init__(self):
@@ -10,7 +10,7 @@ class Storage:
     self.__birthday_table = BirthdayTable(366)
 
   def insert(self, visitorObject):
-    date_of_visit = datetime.strftime(visitorObject.getDateOfVisit(), '%d-%b-%Y')
+    date_of_visit = visitorObject.getDateOfVisit()
     arr = self.__storage_table.get(date_of_visit)
     if (arr is None):
       # record doesn't exist
@@ -27,11 +27,18 @@ class Storage:
       user_table = arr[1]
 
       city_count = city_table.get(visitorObject.getCity())
-      city_table.add(visitorObject.getCity(), (city_count if city_count is not None else 0) + 1)
+      if (city_count is None):
+        # city doesn't exist
+        city_table.add(visitorObject.getCity(), 1)
+      else:
+        # record already present for city
+        city_table.update(visitorObject.getCity(), city_count + 1)
+
       user_table.add(visitorObject.getFirstName(), visitorObject)
 
     # insert in birthday table
-    self.__birthday_table.add(visitorObject.getDateOfBirth(), visitorObject)
+    birthday_key = datetime.strptime(visitorObject.getDateOfBirth().strftime('%d-%b'), '%d-%b')
+    self.__birthday_table.add(birthday_key, visitorObject)
 
     # print table content
     # print('Printing table contents')
@@ -44,7 +51,7 @@ class Storage:
   def find_visitor(self, date_of_visit, first_name):
     arr = self.__storage_table.get(date_of_visit)
     if (arr is None):
-      return None
+      return []
 
     user_table = arr[1]
 
@@ -57,7 +64,7 @@ class Storage:
       return None
 
     user_table = arr[1]
-    return user_table.size()
+    return user_table.length()
 
   def get_tending_city(self, date_of_visit):
     arr = self.__storage_table.get(date_of_visit)
@@ -68,10 +75,13 @@ class Storage:
 
     max = -1
     city = ''
-    for (key, value) in city_table:
-      if (value > max):
-        max = value
-        city = key
+    for obj in city_table:
+      if (obj is not None):
+        key = obj[0]
+        value = obj[1]
+        if (value > max):
+          max = value
+          city = key
 
     return (city, max)
 
@@ -82,4 +92,5 @@ class Storage:
     visitors = []
     while date <= dob2:
       visitors += self.__birthday_table.getAll(date)
+      date += timedelta(days=1)
     return visitors
