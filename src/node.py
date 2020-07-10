@@ -7,7 +7,7 @@ class Node:
   def clone(self):
     return Node(self.key, self.value, self.next)
 
-  def equals1(self, other_node):
+  def equals(self, other_node):
     if (isinstance(other_node, Node)
       and (type(self.value) == type(other_node.value))
       and (self.value == other_node.value)):

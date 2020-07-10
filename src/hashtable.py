@@ -1,14 +1,38 @@
 from linked_list import LinkedList
+from datetime import datetime
+
+def hash_string(key, size):
+  hash = 7
+  for i in range(len(key)):
+    hash = (hash * 31 + ord(key[i])) % size
+
+  return hash % size
+
+def hash_int(key, size):
+  return key % size
+
+def hash_date(key, size):
+  return key % size
 
 class HashTable:
   def __init__(self, size):
-    self.__tableSize = size
+    self._tableSize = size
+    self._a = size
     self.__array = [LinkedList() for i in range(size)]
     self.__size = size
     self.__length = 0
 
   def hash(self, key):
-    return hash(key) % self.__tableSize
+    if (isinstance(key, str)):
+      hash = hash_string(key, self._tableSize)
+    elif (isinstance(key, datetime)):
+      hash = hash_date(key, self._tableSize)
+    elif (isinstance(key, int)):
+      hash = hash_int(key, self._tableSize)
+    else:
+      hash = hash(key) % self._tableSize
+
+    return hash % self._tableSize
 
   def add(self, key, value):
     # Add key, value in hash table

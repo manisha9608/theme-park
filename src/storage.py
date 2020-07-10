@@ -1,14 +1,16 @@
 from hashtable import HashTable
+from birthday_table import BirthdayTable
+from datetime import datetime
 
 class Storage:
   def __init__(self):
 
     self.__storage_table = HashTable(11)
 
-    self.__birthday_table = HashTable(365)
+    self.__birthday_table = BirthdayTable(366)
 
   def insert(self, visitorObject):
-    date_of_visit = visitorObject.getDateOfVisit()
+    date_of_visit = datetime.strftime(visitorObject.getDateOfVisit(), '%d-%b-%Y')
     arr = self.__storage_table.get(date_of_visit)
     if (arr is None):
       # record doesn't exist
@@ -32,12 +34,12 @@ class Storage:
     self.__birthday_table.add(visitorObject.getDateOfBirth(), visitorObject)
 
     # print table content
-    print('Printing table contents')
-    print('Storage table:')
-    self.__storage_table.print()
+    # print('Printing table contents')
+    # print('Storage table:')
+    # self.__storage_table.print()
 
-    print('Prinnting birthday table:\n\n')
-    self.__birthday_table.print()
+    # print('Prinnting birthday table:\n\n')
+    # self.__birthday_table.print()
 
   def find_visitor(self, date_of_visit, first_name):
     arr = self.__storage_table.get(date_of_visit)
@@ -74,4 +76,10 @@ class Storage:
     return (city, max)
 
   def get_birthday_visitors(self, dob1, dob2):
-    return dob2
+    if (dob1 > dob2):
+      return []
+    date = dob1
+    visitors = []
+    while date <= dob2:
+      visitors += self.__birthday_table.getAll(date)
+    return visitors
