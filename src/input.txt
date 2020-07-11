@@ -1,3 +1,0 @@
-inputPS2.txt
-promptsPS2.txt
-outputPS2.txt

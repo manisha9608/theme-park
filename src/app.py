@@ -103,7 +103,7 @@ class App:
 
 def main():
   try:
-    input = open('src/input.txt', 'r')
+    input = open('../input.txt', 'r')
     files = input.readlines()
     if (len(files) <3):
       print('Please provide input, prompt and outpt files path')
