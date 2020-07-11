@@ -43,7 +43,7 @@ class App:
         print('error occurred while insertig visitor', error)
 
     self.__output.writelines(["\n---------- insert ----------\nTotal visitors detailed entered: ",
-      str(count), "\n-----------------------------"])
+      str(count), "\n-----------------------------\n"])
     f.close()
 
   def findVisitor(self, first_name):
@@ -55,9 +55,9 @@ class App:
         str(len(visitors))," visitors with name ", first_name, " on ", date_to_string(date_of_visit), "\n"])
       for visitor in visitors:
         # print('{} {}, {}, {}'.format(visitor.getFirstName(), visitor.getLastName(), visitor.getCity(), visitor.getPhoneNumber()))
-        self.__output.write(visitor.getFirstName()+ " "+ visitor.getLastName()+ " "+
-          visitor.getCity()+ " "+ visitor.getPhoneNumber()+ "\n")
-      self.__output.write("\n-----------------------------")
+        self.__output.write(visitor.getFirstName()+ " "+ visitor.getLastName()+ ", "+
+          visitor.getCity()+ ", "+ visitor.getPhoneNumber()+ "\n")
+      self.__output.write("-----------------------------\n")
 
     except Exception as error:
       print('error occurred in findVisitor', error)
@@ -68,7 +68,7 @@ class App:
       count = self.__parkStorage.get_visitor_count(date_time)
       # print('{} visitors found visiting on {}'.format(count, date_of_visit))
       self.__output.writelines(["\n---------- visitorCount: ---------- \n",str(count),
-        " visitors found visiting on ",date_of_visit, "\n","-----------------------------"])
+        " visitors found visiting on ",date_of_visit, "\n","-----------------------------\n"])
 
     except Exception as error:
       print('error occurred in visitorCount', error)
@@ -78,7 +78,7 @@ class App:
       (city, count) = self.__parkStorage.get_tending_city(self.__today)
       # print('{} visitors from {} visiting today'.format(count, city))
       self.__output.writelines(["\n---------- trendCity: ---------- \n",
-        str(count)," visitors from ",city, "visiting today\n","-----------------------------"])
+        str(count)," visitors from ",city, " visiting today\n","-----------------------------\n"])
 
     except Exception as error:
       print('error occurred in cityVisitor', error)
@@ -93,10 +93,10 @@ class App:
         str(len(visitors)), " visitors have upcoming birthdays between ", birth_date_from, " and ", birth_date_to, "\n"])
       for visitor in visitors:
         #print('{} {}, {}, {}'.format(visitor.getFirstName(), visitor.getLastName, visitor.getDateOfBirth(), visitor.getPhoneNumber))
-        self.__output.write(visitor.getFirstName()+ " "+ visitor.getLastName()+ " "+
-          date_to_string(visitor.getDateOfBirth())+ " "+ visitor.getPhoneNumber()+ "\n")
+        self.__output.write(visitor.getFirstName()+ " "+ visitor.getLastName()+ ", "+
+          date_to_string(visitor.getDateOfBirth())+ ", "+ visitor.getPhoneNumber()+ "\n")
 
-      self.__output.write("-----------------------------")
+      self.__output.write("-----------------------------\n")
 
     except Exception as error:
       print('error occurred in birthdayVisitor', error)
