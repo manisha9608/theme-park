@@ -1,9 +1,0 @@
-python visitor_info_app.py
-print file path to read:
-C:\\Users\\Sony\\Desktop\\M-tech\\1St-Sem\\Data Structures and Algorithms Design-S2-19_DSECLZG519\\assignments\\inputPS2.txt
-Enter any of the options Visitor name or Trending City or Birthday of Visitors
-birthdayVisitor
-enter birthDateFrom:birthDateTo
-13-Jan-1995
-12-Apr-1995
-

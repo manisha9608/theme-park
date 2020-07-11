@@ -1,3 +1,3 @@
-src/inputPS2.txt
-src/promptsPS2.txt
+inputPS2.txt
+promptsPS2.txt
 outputPS2.txt
