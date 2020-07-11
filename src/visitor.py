@@ -3,6 +3,7 @@ from datetime import datetime
 class Visitor:
 
   def __init__(self, firstName, lastName, dov, dob, city, phoneNumber):
+    # set various fields
     self.setFirstName(firstName)
     self.setLastName(lastName)
     self.setDateOfVisit(dov)
@@ -30,6 +31,7 @@ class Visitor:
 
   def setDateOfVisit(self, dov):
     try:
+      # convert string to datetime format
       date_of_visit = datetime.strptime(dov.strip(), '%d-%b-%Y')
       self.__dov = date_of_visit
     except:
@@ -40,6 +42,7 @@ class Visitor:
 
   def setDateOfBirth(self, dob):
     try:
+      # convert string to datetime format
       date_of_birth = datetime.strptime(dob.strip(), '%d-%b-%Y')
       self.__dob = date_of_birth
     except:

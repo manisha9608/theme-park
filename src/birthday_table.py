@@ -4,8 +4,6 @@ from datetime import datetime
 month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 class BirthdayTable(HashTable):
-  '''def __init__(self, size):
-        super(BirthdayTable, self, size).__init__()'''
 
   # override hash function for birthday table
   def hash(self, key):

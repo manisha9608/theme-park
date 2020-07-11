@@ -17,7 +17,6 @@ def hash_date(key, size):
 class HashTable:
   def __init__(self, size):
     self._tableSize = size
-    self._a = size
     self.__array = [LinkedList() for i in range(size)]
     self.__size = size
     self.__length = 0
@@ -45,11 +44,13 @@ class HashTable:
   def update(self, key, value):
     index = self.hash(key)
     list = self.__array[index]
+    # remove record if present
     list.remove(key)
+    # add the updated record
     self.add(key, value)
 
   def get(self, key):
-    # return value corresponding to key
+    # return first value corresponding to key
     index = self.hash(key)
     list = self.__array[index]
     return list.get(key)
@@ -76,8 +77,8 @@ class HashTable:
       list.print()
 
   def __iter__(self):
-    self.__i = 0
-    self.__l = 0
+    self.__i = 0 # index over hashtable
+    self.__l = 0 # index over list corresponding to index
 
     return self
 
@@ -85,11 +86,14 @@ class HashTable:
     if (self.__i < self.__size):
       list = self.__array[self.__i]
       if (self.__l >= list.length):
+        # Searched complete list, increment index by 1 and reset l to 0
         self.__i +=1
         self.__l = 0
         return self.__next__()
       else:
+        # Increase l by 1 and do not inncrement i
         self.__l += 1
         return list.getByIndex(self.__l-1)
     else:
+      # If reached end, stop iteration
       raise StopIteration
