@@ -6,17 +6,17 @@ def date_to_string(date):
   return date.strftime('%d-%b-%Y')
 
 class App:
-  def __init__(self):
+  def __init__(self, output_file):
     # Initialize storage class
     self.__parkStorage = Storage()
     self.__today = None
-    self.__output = open('outputPS2.txt','w')
+    self.__output = open(output_file,'w')
 
   def __del__(self):
     self.__output.close()
 
-  def insertVisitor(self):
-    f = open('src/inputPS2.txt', 'r')
+  def insertVisitor(self, input_file):
+    f = open(input_file, 'r')
     lines = f.readlines()
     count = 0
     for line in lines:
@@ -103,10 +103,18 @@ class App:
 
 def main():
   try:
-    park = App()
-    park.insertVisitor()
+    input = open('src/input.txt', 'r')
+    files = input.readlines()
+    if (len(files) <3):
+      print('Please provide input, prompt and outpt files path')
+
+    input_file = files[0].strip('\n').strip()
+    prompt_file = files[1].strip('\n').strip()
+    output_file = files[2].strip('\n').strip()
+    park = App(output_file)
+    park.insertVisitor(input_file)
     # open prompt file
-    prompt = open('src/promptsPS2.txt','r')
+    prompt = open(prompt_file,'r')
     lines = prompt.readlines()
     for line in lines:
           # process each line and identify tag

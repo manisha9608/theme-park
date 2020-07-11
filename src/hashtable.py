@@ -76,6 +76,14 @@ class HashTable:
       print('hash key: ', index)
       list.print()
 
+  def isFull(self):
+    # If 3/4th is filled, return true
+    if (self.__length / self._tableSize >= 0.75):
+      return True
+
+    return False
+
+
   def __iter__(self):
     self.__i = 0 # index over hashtable
     self.__l = 0 # index over list corresponding to index
